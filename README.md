@@ -17,3 +17,13 @@
      - configure the store
      - create the slice with reducers and actions bacause my reducers will help to change the data in the slice 
      - provide the store to my app using the provider component
+
+
+# refresh the page it redirect to / path 
+ ### solution
+  - when the browser refresh the data of the store(redux) are cleared so the data not shown in navbar
+  - for that at / again add the data into store and dispatch the action
+  - here we can auth the user while get the data of the user if the token is not valid redirect him to the login page 
+  - if he login navigate to feed page 
+  - now if the user refresh it redirect to the / and add the data into the store so the data of the store still remains it shown
+  - if the data come to the store dont again make the user to authticate 

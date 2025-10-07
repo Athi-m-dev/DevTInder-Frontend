@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../utils/constans';
 
 
 const Login = () => {
@@ -14,13 +15,13 @@ const Login = () => {
 
   const  handleLogin =  async () => {
     try {
-      const res = await axios.post("http://localhost:9000/login" , {
+      const res = await axios.post(BASE_URL + "/login" , {
         email : email,
         password : password
       } , { withCredentials: true });
 
       console.log(res.data);
-      dispatch(addUser(res.data.user));
+      dispatch(addUser(res.data.data));
       return navigate("/");
 
     } catch (err) {
@@ -32,6 +33,7 @@ const Login = () => {
     <div className="flex justify-center my-10">
       <div className="card bg-base-300 w-96 shadow-xl">
         <div className="card-body">
+          <h1 className='flex justify-center base-400'>Welcome</h1>
           <label className="form-control w-full max-w-xs my-2">
             <div className="label">
               <span className="label-text">Email ID:</span>
