@@ -24,12 +24,10 @@ const Body = () => {
       if (err.message == "Request failed with status code 401") {
         navigate("/login")
       }
-      console.log(err.message)
     }
   }
 
   useEffect(() => {
-    console.log("use effect called")
     getUser()
   } , [])
 
