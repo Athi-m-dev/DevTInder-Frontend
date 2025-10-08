@@ -11,6 +11,7 @@ const Navbar = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     
+    
     const handlelogout = async () => {
         try {
             await axios.post(BASE_URL + "/logout" , {}, {withCredentials : true});
@@ -20,6 +21,7 @@ const Navbar = () => {
            return;
         }
     }
+
     return (
         <div className="navbar bg-base-300 shadow-sm ">
             <div className="flex-1">
@@ -32,7 +34,7 @@ const Navbar = () => {
                         <div className="w-10 rounded-full">
                             <img
                                 alt="Tailwind CSS Navbar component"
-                                src={user?.PhotoUrl} />
+                                src={user.PhotoUrl} />
                         </div>
                     </div>
                     <ul
@@ -44,7 +46,8 @@ const Navbar = () => {
                                 <span className="badge">New</span>
                             </Link>
                         </li>
-                        <li><a>Settings</a></li>
+                        <li><Link to="/connections">Connections</Link></li>
+                        <li><Link to="/requests">Requests</Link></li>
                         <li><Link to="/logout" onClick={handlelogout}>Logout</Link></li>
                     </ul>
                 </div>
@@ -52,5 +55,4 @@ const Navbar = () => {
         </div>
     )
 }
-
 export default Navbar
