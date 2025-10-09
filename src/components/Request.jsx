@@ -32,6 +32,14 @@ const reviewrequest = async(status , _id) => {
     getRequest()
  }, [])
 
+   if (!requests || requests.length === 0) {
+    return (
+      <div className="text-center my-10">
+        <h1 className="text-bold text-white text-3xl">No Requests Found</h1>
+      </div>
+    );
+  }
+
    return (
     <div className="text-center my-10">
       <h1 className="text-bold text-white text-3xl">Connection Requests</h1>

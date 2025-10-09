@@ -11,23 +11,28 @@ const Feed = () => {
 
   const getfeeddata = async () => {
     try {
-      if(feed) return;
-      const feeddata = await axios.get(BASE_URL + "/user/feed" , {withCredentials : true});
+      if (feed) return;
+      const feeddata = await axios.get(BASE_URL + "/user/feed", { withCredentials: true });
       dispatch(addfeed(feeddata.data.users))
     } catch (err) {
       return;
     }
   }
 
-  useEffect(()=> {
-      getfeeddata()
-  } , [])
+  useEffect(() => {
+    getfeeddata()
+  }, [])
+
+  if (!feed) return;
+
+  if (feed.length <= 0)
+    return <h1 className="flex justify-center my-10">No new users founds!</h1>;
 
   return (
-   feed && (
-     <div className='flex justify-center items-center my-10'>
-     <UserCard  user = {feed[3]}/>
-    </div>
+    feed && (
+      <div className='flex justify-center items-center my-10'>
+        <UserCard user={feed[0]} />
+      </div>
     )
   )
 }

@@ -1,7 +1,20 @@
-import React from 'react'
+import axios from 'axios'
+import React, { use } from 'react'
+import { BASE_URL } from '../utils/constans'
+import { useDispatch } from 'react-redux'
+import { removeUserFromFeed } from '../utils/feedSlice'
 
 const UserCard = ({ user, showAction = true }) => {
-    const { name, age, gender, about, PhotoUrl, skills } = user
+    const { name, age, gender, about, PhotoUrl, skills , _id} = user
+    const dispatch = useDispatch();
+
+    const handleAction = async (status , _id) => {
+        await axios.post(BASE_URL + "/request/send/" + status + "/" + _id , {}, { withCredentials: true });
+        dispatch(removeUserFromFeed(_id))
+    }
+
+    if (!user)  return;
+    if (user.length === 0) return <h1 className='text-bold text-white text-3xl'>No Users Found</h1>
     return (
         <div >
             <div className="card bg-base-300 w-96 shadow-sm ">
@@ -32,8 +45,8 @@ const UserCard = ({ user, showAction = true }) => {
                         </div>
                     )}
                   { showAction && ( <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Ignore</button>
-                        <button className="btn btn-secondary">Interested</button>
+                        <button className="btn btn-primary" onClick={() => handleAction("ignored" , _id)}>Ignore</button>
+                        <button className="btn btn-secondary" onClick={() => handleAction("interested" , _id)}>Interested</button>
                     </div>
                    )}
                 </div>
