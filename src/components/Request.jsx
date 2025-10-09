@@ -1,7 +1,6 @@
-import React, { use } from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import { BASE_URL } from '../utils/constans'
-import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { addRequest, removeRequest } from '../utils/requestSlice'
@@ -19,14 +18,14 @@ const Request = () => {
 } 
 
 const reviewrequest = async(status , _id) => {
-    try {
-        const res = await axios.post(BASE_URL + "/request/review/" + status + "/" + _id , {} , {withCredentials : true})
-        dispatch(removeRequest(_id))
+  try {
+    await axios.post(BASE_URL + "/request/review/" + status + "/" + _id , {} , {withCredentials : true})
+    dispatch(removeRequest(_id)) // it instantly remove the request form the ui
     }
     catch(err) {
         return err.message
     }
-}
+} 
 
  useEffect(() => {
     getRequest()
@@ -45,7 +44,7 @@ const reviewrequest = async(status , _id) => {
       <h1 className="text-bold text-white text-3xl">Connection Requests</h1>
 
       { requests && requests?.map((request) => {
-        const { _id, name ,  photoUrl, age, gender, about } =
+        const { _id, name ,  PhotoUrl, age, gender, about } =
           request.fromUserid;
 
         return (
@@ -57,7 +56,7 @@ const reviewrequest = async(status , _id) => {
               <img
                 alt="photo"
                 className="w-20 h-20 rounded-full"
-                src={photoUrl}
+                src={PhotoUrl}
               />
             </div>
             <div className="text-left mx-4 ">

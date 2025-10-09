@@ -27,7 +27,7 @@ const Navbar = () => {
             <div className="flex-1">
                 <Link to="/" className="btn btn-ghost text-xl">DevTinder</Link>
             </div>
-            {user && <div className="flex gap-2">
+            {user && <div className="flex gap-2 justify-center items-center">
                 <h1 className='px-2'>Welcome {user.name}</h1>
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
